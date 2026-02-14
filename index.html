@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="ico/ico.png" type="image/x-icon">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calles Limpias, Hogares Seguros</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+.hero-bg {
+background:
+linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+url('https://zetatijuana.com/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-01-at-11.32.33-AM.jpeg');
+background-size: cover;
+background-position: center;
+}
+.fade-in {
+opacity: 50;
+transform: translateY(40px);
+transition: 1s ease;
+}
+.fade-in.show {
+opacity: 1;
+transform: translateY(0);
+}
+</style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-md z-50 transition-all duration-300">
+  <div class="flex justify-between items-center w-full px-2 md:px-40 py-3">
+
+
+    <!-- LOGO -->
+    <div class="flex items-center gap-3">
+      <img src="ico/ico.png" alt="Icono" class="w-10 h-10">
+      <span class="font-bold text-xl text-green-600">Calles Limpias</span>
+    </div>
+
+    <!-- MENÚ DESKTOP -->
+    <div class="hidden md:flex items-center space-x-6 font-semibold">
+
+      <a href="#inicio" class="hover:text-green-600 transition">Inicio</a>
+      <a href="#problema" class="hover:text-green-600 transition">Problema</a>
+
+      <!-- Submenú Solución -->
+      <div class="relative group">
+        <a href="#solucion" class="flex items-center gap-1 hover:text-green-600 transition font-semibold">
+          Solución ▾
+        </a>
+        <div class="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col">
+          <button onclick="openModal('tabla')" class="block px-4 py-2 hover:bg-gray-100 rounded-t-xl w-full text-left">📊 Tabla de Actividades</button>
+          <button onclick="openModal('cuadro')" class="block px-4 py-2 hover:bg-gray-100 w-full text-left">👥 División del Trabajo</button>
+          <button onclick="openModal('gantt')" class="block px-4 py-2 hover:bg-gray-100 rounded-b-xl w-full text-left">📅 Diagrama de Gantt</button>
+        </div>
+      </div>
+
+      <a href="#impacto" class="hover:text-green-600 transition">Impacto</a>
+      <a href="#faq" class="hover:text-green-600 transition">Preguntas</a>
+
+      <!-- Submenú Contacto -->
+      <div class="relative group">
+        <a href="#contacto" class="flex items-center gap-1 hover:text-green-600 transition font-semibold">
+          Contacto ▾
+        </a>
+        <div class="absolute left-[-20px] mt-2 w-64 bg-white shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col p-4 space-y-4">
+          <div class="hover:bg-gray-100 p-3 rounded-xl cursor-pointer transition">
+            <p class="text-xs uppercase font-bold text-black/60">WhatsApp Comunitario</p>
+            <p class="text-sm font-semibold mt-1">01-800 CalleLimpia</p>
+          </div>
+          <div class="hover:bg-gray-100 p-3 rounded-xl cursor-pointer transition">
+            <p class="text-xs uppercase font-bold text-black/60">Facebook</p>
+            <p class="text-sm italic font-semibold mt-1">@CallesLimpiasHogaresSeguros</p>
+          </div>
+          <div class="hover:bg-gray-100 p-3 rounded-xl cursor-pointer transition">
+            <p class="text-xs uppercase font-bold text-black/60">TikTok</p>
+            <p class="text-sm italic font-semibold mt-1">@CallesLimpiasHogaresSeguros</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BOTÓN MÓVIL -->
+    <button onclick="toggleMenu()" class="md:hidden text-2xl">☰</button>
+  </div>
+
+  <!-- MENÚ MÓVIL -->
+  <div id="mobileMenu" class="hidden md:hidden bg-white text-center py-4 space-y-4 font-semibold">
+    <a href="#inicio" class="block">Inicio</a>
+    <a href="#problema" class="block">Problema</a>
+
+    <div>
+      <button onclick="this.nextElementSibling.classList.toggle('hidden')" class="w-full text-left py-2 font-bold text-green-600">Solución ▾</button>
+      <div class="hidden flex-col space-y-2 mt-2">
+        <button onclick="openModal('tabla')" class="block w-full py-2 text-green-600">📊 Tabla de Actividades</button>
+        <button onclick="openModal('cuadro')" class="block w-full py-2 text-green-600">👥 División del Trabajo</button>
+        <button onclick="openModal('gantt')" class="block w-full py-2 text-green-600">📅 Diagrama de Gantt</button>
+      </div>
+    </div>
+
+    <a href="#impacto" class="block">Impacto</a>
+    <a href="#faq" class="block">Preguntas</a>
+
+    <div>
+      <button onclick="this.nextElementSibling.classList.toggle('hidden')" class="w-full text-left py-2 font-bold text-green-600">Contacto ▾</button>
+      <div class="hidden space-y-4 mt-2">
+        <div class="p-4 rounded-xl hover:bg-gray-100 transition">
+          <p class="text-xs uppercase font-bold text-green-600">WhatsApp Comunitario</p>
+          <p class="text-sm font-semibold mt-1">01-800 CalleLimpia</p>
+        </div>
+        <div class="p-4 rounded-xl hover:bg-gray-100 transition">
+          <p class="text-xs uppercase font-bold text-green-600">Facebook</p>
+          <p class="text-sm italic font-semibold mt-1">@CallesLimpiasHogaresSeguros</p>
+        </div>
+        <div class="p-4 rounded-xl hover:bg-gray-100 transition">
+          <p class="text-xs uppercase font-bold text-green-600">TikTok</p>
+          <p class="text-sm italic font-semibold mt-1">@CallesLimpiasHogaresSeguros</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<button onclick="toggleMenu()" class="md:hidden text-2xl">☰</button>
+</div>
+
+<div id="mobileMenu" class="hidden md:hidden bg-white text-center py-4 space-y-4 font-semibold">
+<a href="#inicio" class="block">Inicio</a>
+<a href="#problema" class="block">Problema</a>
+<div>
+  <p class="font-bold">Solución</p>
+
+  <button onclick="openModal('tabla')" class="block w-full py-2 text-green-600">
+    Tabla de Actividades
+  </button>
+
+  <button onclick="openModal('cuadro')" class="block w-full py-2 text-green-600">
+    División del Trabajo
+  </button>
+
+  <button onclick="openModal('gantt')" class="block w-full py-2 text-green-600">
+    Diagrama de Gantt
+  </button>
+</div>
+<a href="#impacto" class="block">Impacto</a>
+<a href="#faq" class="block">Preguntas</a>
+<div>
+  <button onclick="this.nextElementSibling.classList.toggle('hidden')" 
+          class="w-full text-left py-2 font-semibold text-green-600">
+    Contacto ▾
+  </button>
+
+  <!-- Submenú oculto por defecto -->
+  <div class="hidden space-y-4 mt-2">
+
+    <!-- WhatsApp -->
+    <div class="bg-white/5 p-4 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+      <p class="text-xs uppercase tracking-widest text-green-400 font-bold">WhatsApp Comunitario</p>
+      <p class="text-sm font-semibold mt-1">01-800 CalleLimpia</p>
+    </div>
+
+    <!-- Facebook -->
+    <div class="bg-white/5 p-4 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+      <p class="text-xs uppercase tracking-widest text-green-400 font-bold">Facebook</p>
+      <p class="text-sm font-semibold mt-1 italic">@CallesLimpiasHogaresSeguros</p>
+    </div>
+
+    <!-- TikTok -->
+    <div class="bg-white/5 p-4 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+      <p class="text-xs uppercase tracking-widest text-green-400 font-bold">TikTok</p>
+      <p class="text-sm font-semibold mt-1 italic">@CallesLimpiasHogaresSeguros</p>
+    </div>
+
+  </div>
+</div>
+
+</div>
+</nav>
+
+<!-- HERO -->
+<header id="inicio" class="hero-bg h-screen flex items-center justify-center text-center text-white px-6">
+<div class="max-w-4xl fade-in">
+<h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+Las inundaciones no son inevitables.
+</h1>
+<p class="text-xl md:text-2xl font-light mb-8">
+Son consecuencia de la falta de organización. Y eso sí podemos cambiarlo.
+</p>
+<div class="space-x-4">
+<a href="#solucion" class="bg-green-600 hover:bg-green-700 px-8 py-4 rounded-lg font-semibold transition shadow-lg">
+Únete al Movimiento
+</a>
+<a href="#contacto" class="border border-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-black transition">
+Participar
+</a>
+</div>
+</div>
+</header>
+
+<!-- PROBLEMA -->
+<section id="problema" class="py-24 bg-white">
+<div class="max-w-6xl mx-auto px-6 text-center fade-in">
+<h2 class="text-4xl font-bold mb-6">Problemáticas Principales</h2>
+<div class="bg-white shadow-lg rounded-2xl p-8 hover:shadow-2xl transition duration-300 mt-10 mb-12">
+<p class="text-lg text-gray-600 max-w-2xl mx-auto text-center ">
+  La acumulación de basura en los drenajes no solo bloquea el paso del agua.
+ Bloquea la seguridad, la salud y la tranquilidad de nuestras familias.
+  <br><br>
+  Esto no es solo un problema ambiental. Es una responsabilidad compartida.
+</p>
+</div>
+</div>
+
+<div class="max-w-6xl mx-auto px-6 mt-15 fade-in">
+  
+  <!-- <h2 class="text-4xl font-bold text-center mb-12">
+    Problemáticas Principales
+  </h2> -->
+
+  <div class="grid md:grid-cols-3 gap-8">
+
+    <!-- Problema 1 -->
+    <div class="bg-white shadow-lg rounded-2xl p-8 hover:shadow-2xl transition duration-300">
+      <h3 class="text-xl font-bold mb-4">Inundaciones Constantes</h3>
+      <p class="text-gray-600">
+        Al taparse las alcantarillas con plásticos, botes y bolsas, el agua no fluye, provocando inundaciones en las calles y afectando directamente los hogares.
+      </p>
+    </div>
+
+    <!-- Problema 2 -->
+    <div class="bg-white shadow-lg rounded-2xl p-8 hover:shadow-2xl transition duration-300">
+      <h3 class="text-xl font-bold mb-4">Riesgos a la Salud</h3>
+      <p class="text-gray-600">
+        La basura acumulada atrae plagas como ratas e insectos, generando focos de infección por el estancamiento de agua contaminada.
+      </p>
+    </div>
+
+    <!-- Problema 3 -->
+    <div class="bg-white shadow-lg rounded-2xl p-8 hover:shadow-2xl transition duration-300">
+      <h3 class="text-xl font-bold mb-4">Daño al Patrimonio</h3>
+      <p class="text-gray-600">
+        Las inundaciones deterioran fachadas, muebles y pavimento, causando pérdidas económicas y afectando la calidad de vida.
+      </p>
+    </div>
+
+  </div>
+<div class="bg-white shadow-lg rounded-2xl p-8 hover:shadow-2xl transition duration-300 mt-">
+    <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center ">
+        En nuestra comunidad, la basura acumulada en las calles se ha convertido en el principal enemigo de nuestra seguridad. 
+        Durante la temporada de lluvias, nuestras alcantarillas colapsan debido a los desechos, provocando inundaciones que ponen en riesgo
+        nuestra salud y nuestro patrimonio. Calles Limpias, Hogares Seguros nace para solucionar este problema desde la raíz.
+    </p>
+</div>
+
+</section>
+
+<!-- SOLUCIÓN -->
+<section id="solucion" class="py-24 bg-gray-100 ">
+  <div class="max-w-6xl mx-auto px-6 fade-in ">
+
+    <!-- Título -->
+    <div class="text-center mb-20">
+      <h2 class="text-4xl font-bold mb-6">Nuestra Estrategia</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto">
+        El proyecto "Calles limpias, hogares seguros" se desarrolla mediante una
+        planificación estructurada por fases que integra diagnóstico comunitario,
+        gestión institucional, organización vecinal y ejecución técnica.
+        Cada etapa contempla actividades específicas, asignación clara de
+        responsabilidades, recursos definidos y control financiero transparente,
+        asegurando viabilidad y sostenibilidad a largo plazo.
+      </p>
+    </div>
+
+    <!-- Primera Línea -->
+    <div class="grid md:grid-cols-3 gap-10 mb-16">
+
+      <div class="bg-white p-10 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h3 class="text-xl font-bold mb-4 text-green-600">Organización Vecinal</h3>
+        <p class="text-gray-600">
+          Realización de juntas comunitarias para presentar el proyecto,
+          conformar comités vecinales y legitimar la intervención.
+          La participación ciudadana garantiza continuidad y corresponsabilidad
+          en el mantenimiento de las alcantarillas.
+        </p>
+      </div>
+
+      <div class="bg-white p-10 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h3 class="text-xl font-bold mb-4 text-green-600">Gestión Institucional</h3>
+        <p class="text-gray-600">
+          Elaboración y entrega de oficios a la Dirección de Servicios Públicos,
+          coordinación con autoridades locales y organización administrativa
+          para asegurar respaldo formal y legal del proyecto.
+        </p>
+      </div>
+
+      <div class="bg-white p-10 rounded-2xl shadow-lg hover:shadow-2xl transition">
+        <h3 class="text-xl font-bold mb-4 text-green-600">Planeación Financiera</h3>
+        <p class="text-gray-600">
+          Recaudación solidaria transparente, control de recursos mediante
+          herramientas digitales y asignación eficiente del presupuesto
+          destinado a materiales, mano de obra y logística.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Segunda Línea -->
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-green-500 hover:shadow-2xl transition">
+        <h4 class="font-bold text-lg mb-3 text-gray-800">Acción Técnica</h4>
+        <p class="text-gray-600 text-sm">
+          Instalación de canastillas metálicas en alcantarillas identificadas
+          durante el diagnóstico previo, acompañada de limpieza inicial y
+          supervisión de un herrero calificado y voluntarios comunitarios.
+        </p>
+        <span class="text-xs font-bold text-green-600 block mt-4 uppercase tracking-wider">
+          Fase de Concreción
+        </span>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-blue-500 hover:shadow-2xl transition">
+        <h4 class="font-bold text-lg mb-3 text-gray-800">División del Trabajo</h4>
+        <p class="text-gray-600 text-sm">
+          Asignación clara de roles: gestor del proyecto, observadores,
+          responsable administrativo, tesorero y equipo técnico.
+          Esta estructura evita sobrecarga del líder y fortalece la transparencia.
+        </p>
+        <span class="text-xs font-bold text-blue-600 block mt-4 uppercase tracking-wider">
+          Dirección y Organización
+        </span>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-purple-500 hover:shadow-2xl transition">
+        <h4 class="font-bold text-lg mb-3 text-gray-800">Tecnología y Seguimiento</h4>
+        <p class="text-gray-600 text-sm">
+          Uso de herramientas digitales como WhatsApp para coordinación,
+          Excel para control financiero y plataformas de difusión para
+          convocar voluntarios y mantener comunicación constante.
+        </p>
+        <span class="text-xs font-bold text-purple-600 block mt-4 uppercase tracking-wider">
+          Seguimiento Estratégico
+        </span>
+      </div>
+
+    </div>
+
+<!-- Documentación Técnica -->
+<div class="mt-24 text-center">
+
+  <h3 class="text-3xl font-bold mb-6">Planificación y Sustento Técnico</h3>
+
+  <p class="text-gray-600 max-w-2xl mx-auto mb-10">
+    Para garantizar transparencia y organización en cada etapa del proyecto, 
+    hemos desarrollado herramientas de planificación que permiten visualizar 
+    tiempos, recursos y responsabilidades. Consulta los documentos estratégicos 
+    que respaldan nuestra intervención.
+  </p>
+
+  <div class="flex flex-wrap justify-center gap-6">
+
+    <button onclick="openModal('tabla')" 
+      class="bg-green-600 text-white px-6 py-3 rounded-xl shadow-md hover:bg-green-700 transition">
+      Ver Tabla de Actividades
+    </button>
+
+    <button onclick="openModal('cuadro')" 
+      class="bg-blue-600 text-white px-6 py-3 rounded-xl shadow-md hover:bg-blue-700 transition">
+      Ver División del Trabajo
+    </button>
+
+    <button onclick="openModal('gantt')" 
+      class="bg-purple-600 text-white px-6 py-3 rounded-xl shadow-md hover:bg-purple-700 transition">
+      Ver Diagrama de Gantt
+    </button>
+
+  </div>
+</div>
+
+
+<!-- SCRIPt -->
+<script>
+  function openModal(tipo) {
+    const modal = document.getElementById("modal");
+    const image = document.getElementById("modalImage");
+
+    let imagen = "";
+
+    if (tipo === "tabla") {
+      imagen = "img/tablaact.png";
+    } else if (tipo === "cuadro") {
+      imagen = "img/divisiontrab.png";
+    } else if (tipo === "gantt") {
+      imagen = "img/grantt.png";
+    }
+
+    image.src = imagen;
+    modal.classList.remove("hidden");
+  }
+
+  function closeModal() {
+    document.getElementById("modal").classList.add("hidden");
+  }
+
+  // 🔥 Cerrar si hacen click en el fondo
+  document.getElementById("modal").addEventListener("click", function() {
+    closeModal();
+  });
+
+  // ❗ Evita que al hacer click en la imagen se cierre
+  document.getElementById("modalImage").addEventListener("click", function(e) {
+    e.stopPropagation();
+  });
+</script>
+
+
+
+
+</section>
+<!-- MODAL -->
+<div id="modal" class="fixed inset-0 bg-black/90 hidden z-[9999] flex items-center justify-center">
+
+  <button onclick="closeModal()" 
+    class="absolute top-6 right-8 text-white text-4xl hover:scale-110 transition">
+    ✕
+  </button>
+
+  <img id="modalImage"
+       class="max-w-[85vw] max-h-[85vh] object-contain">
+</div>
+
+
+
+
+
+<!-- IMPACTO -->
+<section id="impacto" class="py-28 bg-gradient-to-b from-green-50 to-white">
+  <div class="max-w-6xl mx-auto px-6 fade-in space-y-20">
+
+    <!-- Encabezado -->
+    <div class="text-center space-y-4">
+      <!-- <div class="inline-block px-4 py-2 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-widest">
+        Fase 6: Control y Medición
+      </div> -->
+      <h2 class="text-4xl font-black text-slate-800">
+        Impacto y Resultados Esperados
+      </h2>
+      <p class="text-slate-500 max-w-2xl mx-auto">
+        Evaluamos el éxito del proyecto mediante indicadores sociales, ambientales 
+        y organizativos que permiten medir resultados reales en la comunidad.
+      </p>
+    </div>
+
+    <!-- Tarjetas de Impacto -->
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <div class="bg-white p-8 rounded-3xl shadow-lg border-b-8 border-red-500 hover:-translate-y-2 transition">
+   
+        <h3 class="text-xl font-bold text-slate-800 mb-3">Salud Pública</h3>
+        <p class="text-sm text-slate-600 italic">
+          Reducción de focos de infección y disminución de plagas causadas por 
+          acumulación de agua y residuos sólidos.
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-3xl shadow-lg border-b-8 border-blue-500 hover:-translate-y-2 transition">
+        
+        <h3 class="text-xl font-bold text-slate-800 mb-3">Seguridad Patrimonial</h3>
+        <p class="text-sm text-slate-600 italic">
+          Prevención de inundaciones que dañan viviendas, fachadas y bienes 
+          materiales de las familias.
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-3xl shadow-lg border-b-8 border-green-500 hover:-translate-y-2 transition">
+        
+        <h3 class="text-xl font-bold text-slate-800 mb-3">Preservación Ambiental</h3>
+        <p class="text-sm text-slate-600 italic">
+          Correcta disposición de desechos, evitando contaminación del suelo 
+          y sistemas de drenaje.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Indicadores Cuantitativos -->
+    <div class="bg-green-600 text-white p-14 rounded-3xl shadow-xl">
+      <h3 class="text-2xl font-bold mb-10 text-center">
+        Indicadores de Éxito
+      </h3>
+
+      <div class="grid md:grid-cols-3 gap-10 text-center text-5xl font-extrabold">
+
+        <div>
+          <span class="counter" data-target="8">0</span>
+          <p class="text-lg font-light mt-4">Familias Organizados</p>
+        </div>
+
+        <div>
+          <span class="counter" data-target="2">0</span>
+          <p class="text-lg font-light mt-4">Jornadas Realizadas</p>
+        </div>
+
+        <div>
+          <span class="counter" data-target="35">0</span>%
+          <p class="text-lg font-light mt-4">Reducción de Residuos</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Escenario Óptimo -->
+    <div class="bg-white p-12 rounded-3xl border border-slate-200 shadow-md">
+      <h3 class="text-2xl font-bold text-slate-800 mb-6">
+        Escenario Óptimo
+      </h3>
+
+      <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-xl">
+        <p class="text-slate-700 leading-relaxed">
+          <strong>Propuesta:</strong> Los vecinos cumplen el calendario de mantenimiento 
+          y las autoridades realizan desazolve preventivo en temporadas de lluvia.
+          <br><br>
+          <strong>Resultado:</strong> Calles libres de residuos, drenaje funcional al 100% 
+          y una comunidad organizada que previene futuras inundaciones.
+        </p>
+      </div>
+
+      <p class="text-xs text-slate-400 mt-4 uppercase tracking-widest font-bold">
+        Basado en seguimiento continuo y control comunitario
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-28 bg-gradient-to-b from-green-50 to-white">
+<div class="max-w-4xl mx-auto px-6 fade-in">
+<h2 class="text-4xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
+
+<div class="space-y-6">
+<div>
+<button onclick="toggleFAQ(this)" class="w-full text-left font-semibold text-lg">
+¿Por qué es importante este proyecto si el ayuntamiento es quien debe limpiar las calles?
+</button>
+<p class="hidden mt-2 text-gray-600">
+Aunque la limpieza pública es responsabilidad municipal, el acumulamiento de basura en nuestras 
+calles específicas nos afecta directamente a nosotros de forma inmediata (inundaciones y plagas). 
+Este proyecto es una iniciativa ciudadana para colaborar, prevenir daños a nuestras casas y exigir 
+un mejor servicio con evidencias claras.
+</p>
+</div>
+
+<div class="space-y-6">
+<div>
+<button onclick="toggleFAQ(this)" class="w-full text-left font-semibold text-lg">
+¿Cómo se asegura que las rejillas realmente se mantengan limpias después de la jornada?
+</button>
+<p class="hidden mt-2 text-gray-600">
+A través de la Fase de Control, hemos establecido un "Comité de Vigilancia". Este grupo se encarga 
+de realizar inspecciones quincenales y recordatorios amistosos a través del grupo de WhatsApp vecinal, 
+además de gestionar que el camión recolector pase en los horarios establecidos.
+</p>
+</div>
+
+<div class="space-y-6">
+<div>
+<button onclick="toggleFAQ(this)" class="w-full text-left font-semibold text-lg">
+¿El proyecto contempla la reparación de baches o alcantarillas rotas?
+</button>
+<p class="hidden mt-2 text-gray-600">
+El enfoque principal es la gestión de residuos sólidos para evitar inundaciones. Sin embargo, al estar organizados 
+como comité vecinal, tendremos mayor fuerza legal para emitir reportes y solicitudes formales al ayuntamiento para 
+reparaciones de infraestructura.
+</p>
+</div>
+
+
+<div class="space-y-6">
+<div>
+<button onclick="toggleFAQ(this)" class="w-full text-left font-semibold text-lg">
+¿Tiene algún costo participar?
+</button>
+<p class="hidden mt-2 text-gray-600">
+El proyecto está diseñado para ser de bajo costo. La mayor aportación es el tiempo y la disposición para 
+mantener limpio el frente de cada casa y participar en las jornadas vecinales. Los materiales de limpieza 
+básicos generalmente ya los tenemos en casa, y cualquier gasto extra (como lonas informativas) se decide y 
+reparte de forma transparente entre los voluntarios.
+</p>
+</div>
+
+<div class="space-y-6">
+<div>
+<button onclick="toggleFAQ(this)" class="w-full text-left font-semibold text-lg">
+¿Qué pasa si mis vecinos no quieren participar?
+</button>
+<p class="hidden mt-2 text-gray-600">
+Sabemos que la resistencia al cambio es común. Por eso, el proyecto inicia con una campaña de sensibilización. 
+No se obliga a nadie, pero se busca demostrar con resultados que una calle limpia beneficia la plusvalía de todas 
+las casas y la salud de todas las familias. El ejemplo es nuestra mejor herramienta.
+</p>
+</div>
+
+<div>
+<button onclick="toggleFAQ(this)" class="w-full text-left font-semibold text-lg">
+¿Cómo puedo integrarme al comité?
+</button>
+<p class="hidden mt-2 text-gray-600">
+Puedes participar registrándote en nuestro formulario, asistiendo a nuestras reuniones vecinales o enviándonos un mensaje a través de nuestras redes sociales.
+<br>
+<br>
+¡Tu participación es muy importante para lograr un cambio positivo en nuestra comunidad!
+</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="py-28 bg-gradient-to-b from-slate-900 to-black text-white">
+  <div class="max-w-6xl mx-auto px-6 space-y-16">
+
+    <!-- Encabezado -->
+    <div class="text-center space-y-4">
+      <h2 class="text-4xl font-black">
+        ¿Listo para hacer la diferencia?
+      </h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">
+        Únete a las brigadas vecinales o envía un mensaje para colaborar 
+        en el proyecto "Calles Limpias, Hogares Seguros".
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-14 items-start">
+
+      <!-- Información -->
+      <div class="space-y-8">
+
+        <div class="bg-white/5 p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+          <p class="text-xs uppercase tracking-widest text-green-400 font-bold">Ubicación</p>
+          <p class="text-lg font-semibold mt-2">Estado Mex. Circuito 042.</p>
+        </div>
+
+        <div class="bg-white/5 p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+          <p class="text-xs uppercase tracking-widest text-green-400 font-bold">WhatsApp Comunitario</p>
+          <p class="text-lg font-semibold mt-2">01-800 CalleLimpia</p>
+        </div>
+
+        <div class="bg-white/5 p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+          <p class="text-xs uppercase tracking-widest text-green-400 font-bold">Facebook</p>
+          <p class="text-lg font-semibold mt-2 italic">@CallesLimpiasHogaresSeguros</p>
+        </div>
+
+
+          <div class="bg-white/5 p-6 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+          <p class="text-xs uppercase tracking-widest text-green-400 font-bold">TikTok</p>
+          <p class="text-lg font-semibold mt-2 italic">@CallesLimpiasHogaresSeguros</p>
+        </div>
+
+        <div class="bg-green-600 p-6 rounded-3xl shadow-xl">
+          <p class="text-sm uppercase tracking-widest font-bold">Brigadas Activas</p>
+          <p class="mt-2 text-green-100">
+            Actualmente contamos con 12 voluntarios activos en el sector centro. 
+            ¡Tu participación es fundamental!
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Formulario -->
+      <div class="bg-white text-slate-800 p-10 rounded-3xl shadow-2xl">
+
+        <form id="contactForm" class="space-y-5">
+
+          <div>
+            <label class="text-sm font-bold block mb-2">Nombre Completo</label>
+            <input type="text" required
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-green-500 outline-none transition"
+              placeholder="Ej. Juan Pérez">
+          </div>
+
+          <div>
+            <label class="text-sm font-bold block mb-2">Correo Electrónico</label>
+            <input type="email" required
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-green-500 outline-none transition"
+              placeholder="tu@correo.com">
+          </div>
+
+          <div>
+            <label class="text-sm font-bold block mb-2">Asunto</label>
+            <select
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-green-500 outline-none transition">
+              <option>Quiero ser voluntario</option>
+              <option>Reportar alcantarilla obstruida</option>
+              <option>Duda sobre el proyecto</option>
+              <option>Otro</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="text-sm font-bold block mb-2">Mensaje</label>
+            <textarea rows="4"
+              class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-green-500 outline-none transition resize-none"
+              placeholder="Escribe tu mensaje aquí..."></textarea>
+          </div>
+
+          <button type="submit"
+            class="w-full bg-green-600 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-green-700 transition">
+            Enviar Mensaje
+          </button>
+
+        </form>
+
+        <!-- Mensaje de éxito -->
+        <div id="successMessage" class="hidden mt-6 text-center">
+          <p class="text-green-600 font-bold text-lg">
+            ✔ ¡Mensaje enviado correctamente!
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    document.getElementById("successMessage").classList.remove("hidden");
+    this.reset();
+  });
+</script>
+
+
+
+
+
+<footer class="bg-black text-gray-400 text-center py-6 text-sm">
+© 2026 Calles Limpias, Hogares Seguros | Movimiento Comunitario  | Roger Mendez
+</footer>
+
+<script>
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("hidden");
+}
+
+function toggleFAQ(btn){
+btn.nextElementSibling.classList.toggle("hidden");
+}
+
+const faders = document.querySelectorAll('.fade-in');
+window.addEventListener('scroll', () => {
+faders.forEach(el => {
+const top = el.getBoundingClientRect().top;
+if(top < window.innerHeight - 100){
+el.classList.add('show');
+}
+});
+});
+
+const counters = document.querySelectorAll('.counter');
+counters.forEach(counter => {
+const update = () => {
+const target = +counter.getAttribute('data-target');
+const count = +counter.innerText;
+const increment = target / 100;
+
+if(count < target){
+counter.innerText = Math.ceil(count + increment);
+setTimeout(update, 20);
+} else {
+counter.innerText = target;
+}
+};
+update();
+});
+</script>
+
+</body>
+</html>
